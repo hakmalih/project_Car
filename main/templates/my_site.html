@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="">
+    <label for="options">Выберите марку авто:</label>
+    <select name="options" id="options">
+        <option >--Выберите бренд--</option>
+        {%for brand in brands %}
+        <option value={{brand.id}}>{{brand}}</option>
+        {%endfor%}
+    </select>
+    <button>Отправить</button>
+</form>
+
+{% for car in cars %}
+<a href="{% url 'car_detail' car.id %}">
+<p>{{car.model}}</p>
+</a>
+{% endfor %}
+</body>
+</html>

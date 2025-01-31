@@ -1,0 +1,86 @@
+.container{
+    max-width: 1500px;
+    padding: 0 10px;
+    margin: 0 auto;
+}
+.header{
+    background-color: #F6F6F7;
+}
+.header__wrapper{
+    background:bisque;
+    padding:10px ;
+    display:flex;
+    justify-content: space-around;
+    align-items:center;
+}
+
+.header__logo{
+   display: flex;
+   max-width:150px;
+   max-height:150px;
+   & img{
+       width:100%;
+       height:100%;
+   }
+}
+
+.header__phone-list{
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.header__slogan{
+    font-size: 40px;
+    font-weight: bold;
+    color: deeppink;
+
+}
+.header__phone-item{
+    display:flex;
+    gap: 10px;
+    align-items: center;
+    & p {
+        font-size: 20px;
+    }
+}
+
+.header__phone-item-img{
+    display:flex;
+    max-width: 30px;
+    max-height: 30px;
+    & img{
+        width:100%;
+        height:100%;
+    }
+}
+
+
+.header__second__wrapper{
+    height:50px;
+    background-color: green;
+}
+
+.main__wrapper{
+    min-height:700px;
+    background-color: blanchedalmond;
+}
+
+.main__car-list{
+    display:flex;
+    flex-wrap: wrap;
+    padding: 50px;
+    justify-content: space-around;
+}
+.main__car-item{
+    display:flex;
+    flex-direction: column;
+    margin:20px;
+    height:500px;
+    width:300px;
+    align-items: center;
+    justify-content: space-around;
+    background-color:white;
+    border-radius: 40px;
+}

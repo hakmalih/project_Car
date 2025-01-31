@@ -11,12 +11,11 @@ def get_main_page(request):
     if data:
         cars = Car.objects.filter(brand=data)
     bmw=brands[1]
-    print(bmw.car_set.all())
     context = {
         'cars': cars,
         'brands':brands,
     }
-    return render(request,'my_site.html', context)
+    return render(request,'main.html', context)
 
 
 def car_detail(request,id):

@@ -60,63 +60,22 @@
         <div class="container">
             <div class="main__wrapper">
                 <ul class="main__car-list">
+                    {% for car in cars%}
                     <li class="main__car-item">
                         <div class="main__car-item-img">
                             <img src="" alt="">
                         </div>
                         <p class="main__car-item-information">
-                            BMW M5
+                            {{car.brand}} {{car.model}}
                         </p>
                         <p class="main__car-item-color">
-                            Black
+                            {{car.color}}
                         </p>
                         <p class="main__car-item-price">
-                            25 055
+                            {{car.price}}
                         </p>
                     </li>
-                    <li class="main__car-item">
-                        <div class="main__car-item-img">
-                            <img src="" alt="">
-                        </div>
-                        <p class="main__car-item-information">
-                            BMW M5
-                        </p>
-                        <p class="main__car-item-color">
-                            Black
-                        </p>
-                        <p class="main__car-item-price">
-                            25 055
-                        </p>
-                    </li>
-                    <li class="main__car-item">
-                        <div class="main__car-item-img">
-                            <img src="" alt="">
-                        </div>
-                        <p class="main__car-item-information">
-                            BMW M5
-                        </p>
-                        <p class="main__car-item-color">
-                            Black
-                        </p>
-                        <p class="main__car-item-price">
-                            25 055
-                        </p>
-                    </li>
-                    <li class="main__car-item">
-                        <div class="main__car-item-img">
-                            <img src="" alt="">
-                        </div>
-                        <p class="main__car-item-information">
-                            BMW M5
-                        </p>
-                        <p class="main__car-item-color">
-                            Black
-                        </p>
-                        <p class="main__car-item-price">
-                            25 055
-                        </p>
-                    </li>
-
+                    {% endfor %}
                 </ul>
             </div>
         </div>

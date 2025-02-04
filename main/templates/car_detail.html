@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/car_detail.css'%}">
+{% endblock css%}
+
+{% block main%}
+{% for image in picture%}
+<img src="{{image.picture.url}}" alt="">
+{% endfor %}
+{% endblock main%}

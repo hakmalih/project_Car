@@ -9,6 +9,15 @@ class Brand (models.Model):
         return self.title
 
 
+class CarImage(models.Model):
+    picture = models.ImageField(upload_to='car')
+    car = models.ForeignKey('Car',on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.car.model
+
+
+
 class Car (models.Model):
     brand = models.ForeignKey('Brand',on_delete=models.CASCADE)
     model = models.CharField(max_length=50)

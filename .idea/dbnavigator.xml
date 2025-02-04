@@ -24,7 +24,9 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="024af160-541e-4086-834f-3ab1c34ed412" object-ref="schemas/main/tables/main_carimage" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="024af160-541e-4086-834f-3ab1c34ed412" />
@@ -32,6 +34,7 @@
   <component name="DBNavigator.Project.DatasetFilterManager">
     <filter-actions connection-id="024af160-541e-4086-834f-3ab1c34ed412" dataset="main.main_brand" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="024af160-541e-4086-834f-3ab1c34ed412" dataset="main.main_car" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="024af160-541e-4086-834f-3ab1c34ed412" dataset="main.main_carimage" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />

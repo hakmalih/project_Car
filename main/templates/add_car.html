@@ -6,19 +6,11 @@
 {% endblock css%}
 
 {% block main %}
-<form action="" method="POST" >
+<form action="" method="POST" enctype="multipart/form-data" >
     {% csrf_token %}
-    <select name="brand">
-        {% for brand in brands%}
-        <option value="{{brand.title}}">{{brand.title}}</option>
-        {% endfor %}
-    </select>
-    <input type="text" name="model" placeholder="Модель" > <br>
-    <input type="text" name="color" placeholder="Цвет" > <br>
-    <input type="text" name="annotation" placeholder="Краткое описание" > <br>
-    <input type="text" name="description" placeholder="Описание" > <br>
-    <input type="number" name="price"placeholder="Цена"><br>
-    <input type="file" name='image' placeholder="Фотография"> <br>
-    <button>Сохранить</button>
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button>Отправить</button>
 </form>
 {% endblock main %}

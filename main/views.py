@@ -2,6 +2,8 @@ from django.shortcuts import render
 
 from main.models import Car, Brand, CarImage
 
+from .forms import AddCarForm
+
 
 # Create your views here.
 def get_main_page(request):
@@ -26,26 +28,17 @@ def car_detail(request,id):
 
 
 def add_car(request):
-    new =Car.objects.all()
-    brands=Brand.objects.all()
-    context = {
-        'new': new,
-        'brands':brands,
-    }
-    if request.method == 'POST':
-        data = request.POST
-        model = data.get('model')
-        color= data.get('color')
-        annotation= data.get('annotation')
-        description= data.get('description')
-        price = data.get('price')
-        image = data.get('image')
-        if model and color and annotation and description and image:
-            if price.isdigit() :
-                new_car_instance = Car(model=model,color=color,annotation=annotation,description=description,price=price,image=image)
-                new_car_instance.save()
-            else:
-                context['error_age'] = 'неправильный тип данных '
+    form = AddCarForm()
+    print(form.is_bound,'32')
+    if request.method=="POST":
+        form = AddCarForm(request.POST,request.FILES)
+        if form.is_valid():
+            print('ok')
+            print(form.cleaned_data)
         else:
-            context['error'] = 'заполните все поля'
+            print('ne ok')
+            print(form.errors)
+    context={
+        'form':form,
+    }
     return render(request,'add_car.html', context)

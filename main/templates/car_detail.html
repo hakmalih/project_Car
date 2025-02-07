@@ -5,8 +5,38 @@
 <link rel="stylesheet" href="{% static 'css/car_detail.css'%}">
 {% endblock css%}
 
+
 {% block main%}
-{% for image in picture%}
-<img src="{{image.picture.url}}" alt="">
-{% endfor %}
+<li class="main__car-item-detailpage">
+     <div class="main__car-item-detailpage-backgroundbox">
+        <div class="main__car-item-detailpage-header">
+            {{cars.brand}} {{cars.model}}
+        </div>
+         <div class="main__car-item-detailpage-mainimg">
+             <img src="{{ cars.image.url }}" alt="">
+        </div>
+         {% for image in picture%}
+            <div class="main__car-item-additional-img">
+                <img src="{{image.picture.url}}" alt="">
+            </div>
+         {% endfor %}
+        <div class="main__car-item-detailpage-color">
+            {{cars.color}}
+        </div>
+        <div class="main__car-item-detailpage-price">
+            {{cars.price}}
+        </div>
+         <div class="main__car-item-detailpage-annotation-box">
+             <div class="main__car-item-detailpage-annotation">
+                 {{cars.annotation}}
+             </div>
+         </div>
+         <div class="main__car-item-detailpage-description-box">
+             <div class="main__car-item-detailpage-description">
+                 {{cars.description}}
+             </div>
+         </div>
+
+     </div>
+</li>
 {% endblock main%}

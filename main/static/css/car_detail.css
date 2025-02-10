@@ -1,55 +1,71 @@
 {% block css %}
 
-.main__car-item-additional-img{
-    flex: 0 1 92px;
-    border-radius:5px;
-    background:white;
-    cursor:pointer;
-}
-
-.main__car-item-information{
-    display:flex;
-    font-size: 40px;
-    font-weight: bold;
-    color: black;
-}
 .main__car-item-detailpage-backgroundbox{
+    position:relative;
     display:flex;
-    margin:20px;
-    height:500px;
-    width:auto;
-    justify-content: space-around;
+    margin:30px 40px;
+    padding:20px;
+    height:800px;
     background-color:white;
     border-radius: 40px;
     color:black;
 }
+
+.main__car-item-detailpage-header{
+    font-size: 40px;
+    font-family: 'Times New Romanov';
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    color: #444;
+}
+.main__car-item-detailpage-mainimg{
+    position:absolute;
+    display: flex;
+    top: 100px; /* Смещение сверху */
+    left: 50px; /* Смещение слева */
+    width: 400px;
+    height: 300px;
+   & img {
+        width: 100%; /* Адаптация картинки по ширине контейнера */
+        height: auto; /* Сохранение пропорций */
+        border-radius: 5px;
+   }
+}
+.main__car-item-detailpage-rightpart{
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    top: 100px; /* Смещение сверху */
+    right: 50px; /* Смещение слева */
+    width: 450px;
+    height: auto;
+    font-size: 25px;
+    font-family: 'Times New Romanov';
+
+    & main__car-item-detailpage-annotation{
+        white-space: normal;
+    }
+}
+
 .main__car-item-additional-img{
-    display:flex;
-    flex-direction:column;
-    max-width:150px;
-    max-height:150px;
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    top: 100px; /* Смещение сверху */
+    left:480px;
     & img{
         width:100%;
-        height:100%;
+        height:100px;
+    }
 }
-.main__car-item-detailpage-annotation-box{
-    margin:20px;
-    height:auto;
-    width:450px;
-    justify-content: space-around;
-    background-color:white;
-    border-radius: 140px;
-    color:black;
+
+.main__car-item-detailpage-description-box{
+    position:absolute;
+    display: flex;
+    top: 450px; /* Смещение сверху */
+    font-size: 20px;
+    font-family: 'Times New Romanov';
 }
-.main__car-item-detailpage-description{
-    margin:20px;
-    height:450px;
-    width:450px;
-    bottom:20px;
-    align:right;
-    background-color:white;
-    border-radius: 140px;
-    color:black;
-}
-}
+
 {% endblock css %}

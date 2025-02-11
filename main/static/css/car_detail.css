@@ -1,11 +1,14 @@
 {% block css %}
 
+.main_detail {
+    padding: 20px;
+}
+
 .main__car-item-detailpage-backgroundbox{
-    position:relative;
     display:flex;
-    margin:30px 40px;
+    flex-direction: column;
     padding:20px;
-    height:800px;
+
     background-color:white;
     border-radius: 40px;
     color:black;
@@ -19,51 +22,46 @@
     margin-left: 10px;
     color: #444;
 }
+
+.main__car-item-detailpage-topbox{
+    display:flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+.main__car-item-detailpage-leftpart{
+    display:flex;
+    min-width: 500px;
+    justify-content: space-between;
+}
 .main__car-item-detailpage-mainimg{
-    position:absolute;
+    display:flex;
+    height:250px;
+    width:250px;
+}
+.main__car-item-additional-img{
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.main__car-item-additional-img-item {
     display: flex;
-    top: 100px; /* Смещение сверху */
-    left: 50px; /* Смещение слева */
-    width: 400px;
-    height: 300px;
-   & img {
-        width: 100%; /* Адаптация картинки по ширине контейнера */
-        height: auto; /* Сохранение пропорций */
-        border-radius: 5px;
-   }
+    max-width: 100px;
+    max-height: 100px;
+    & img {
+    width: 100%;
+    height: 100%;
+    }
 }
 .main__car-item-detailpage-rightpart{
-    position:absolute;
-    display: flex;
+    display:flex;
     flex-direction: column;
-    top: 100px; /* Смещение сверху */
-    right: 50px; /* Смещение слева */
-    width: 450px;
-    height: auto;
-    font-size: 25px;
+    font-size: 20px;
     font-family: 'Times New Romanov';
-
-    & main__car-item-detailpage-annotation{
-        white-space: normal;
-    }
+    flex-wrap: wrap;
 }
-
-.main__car-item-additional-img{
-    position:absolute;
-    display: flex;
-    flex-direction: column;
-    top: 100px; /* Смещение сверху */
-    left:480px;
-    & img{
-        width:100%;
-        height:100px;
-    }
-}
-
 .main__car-item-detailpage-description-box{
-    position:absolute;
     display: flex;
-    top: 450px; /* Смещение сверху */
+    top: 450px;
     font-size: 20px;
     font-family: 'Times New Romanov';
 }

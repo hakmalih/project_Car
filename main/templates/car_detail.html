@@ -8,29 +8,34 @@
 
 {% block main%}
  <div class="main__car-item-detailpage-backgroundbox">
-
-     <div class="main__car-item-detailpage-mainimg">
-         <img src="{{ cars.image.url }}" alt="">
-    </div>
      <div class="main__car-item-detailpage-header">
         {{cars.brand}} {{cars.model}}
      </div>
-    <div class="main__car-item-additional-img">
-        {% for image in picture%}
-            <img src="{{image.picture.url}}" alt="">
-        {% endfor %}
-    </div>
-    <div class="main__car-item-detailpage-rightpart">
-        <div class="main__car-item-detailpage-annotation">
-             {{cars.annotation}}
+     <div class="main__car-item-detailpage-topbox">
+         <div class="main__car-item-detailpage-leftpart">
+             <div class="main__car-item-detailpage-mainimg">
+                <img src="{{ cars.image.url }}" alt="">
+             </div>
+             <div class="main__car-item-additional-img">
+                {% for image in picture %}
+                 <div class="main__car-item-additional-img-item">
+                    <img src="{{image.picture.url}}" alt="">
+                     </div>
+                {% endfor %}
+             </div>
          </div>
-        <div class="main__car-item-detailpage-color">
-            Цвет:{{cars.color}}
+         <div class="main__car-item-detailpage-rightpart">
+            <div class="main__car-item-detailpage-annotation">
+                 {{cars.annotation}}
+             </div>
+            <div class="main__car-item-detailpage-color">
+                Цвет:{{cars.color}}
+            </div>
+            <div class="main__car-item-detailpage-price">
+                Цена:{{cars.price}}
+            </div>
         </div>
-        <div class="main__car-item-detailpage-price">
-            Цена:{{cars.price}}
-        </div>
-    </div>
+     </div>
      <div class="main__car-item-detailpage-description-box">
          <div class="main__car-item-detailpage-description">
              {{cars.description}}

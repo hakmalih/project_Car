@@ -20,10 +20,15 @@ class MultipleFileField(forms.ImageField):
 
 class AddCarForm(forms.Form):
     brand = forms.ModelChoiceField(queryset=Brand.objects.all())
-    model = forms.CharField(max_length=50)
+    model = forms.CharField(max_length=50,initial='johan')
     price = forms.DecimalField(max_digits=8, decimal_places=2)
     image = forms.ImageField()
     additional_img = MultipleFileField()
     color = forms.CharField(max_length=100)
     description = forms.CharField(widget=forms.Textarea())
     annotation = forms.CharField(max_length=1000)
+
+
+
+class AnotherImageForm(forms.Form):
+    additional_img = forms.ImageField()

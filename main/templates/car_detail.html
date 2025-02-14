@@ -6,7 +6,11 @@
 {% endblock css%}
 
 
-{% block main%}
+{% block navigator %}
+<a href="{% url 'johan' cars.id %}">Редактировать запись</a>
+{% endblock navigator %}
+
+{% block main %}
  <div class="main__car-item-detailpage-backgroundbox">
      <div class="main__car-item-detailpage-header">
         {{cars.brand}} {{cars.model}}
@@ -43,4 +47,4 @@
      </div>
 
  </div>
-{% endblock main%}
+{% endblock main %}

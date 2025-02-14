@@ -58,8 +58,10 @@
 
 
 .header__second__wrapper{
+    display:flex;
     height:50px;
     background-color: green;
+    justify-content: space-between;
 }
 
 .main__wrapper{

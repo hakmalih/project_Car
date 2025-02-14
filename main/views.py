@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from main.models import Car, Brand, CarImage
 
-from .forms import AddCarForm
+from .forms import AddCarForm,AnotherImageForm
 
 
 # Create your views here.
@@ -48,3 +48,28 @@ def add_car(request):
         'form': form,
     }
     return render(request, 'add_car.html', context)
+
+
+
+def edit_car(request,id):
+    form = AddCarForm()
+    car = Car.objects.get(id=id)
+    another_image = CarImage.objects.filter(car_id=id)
+    additional_img=[]
+
+    form.fields.get('brand').initial = car.brand
+    form.fields.get('model').initial=car.model
+    form.fields.get('price').initial=car.price
+    form.fields.get('image').initial=car.image
+    form.fields.get('color').initial=car.color
+    form.fields.get('description').initial=car.description
+    form.fields.get('annotation').initial=car.annotation
+    for i in another_image:
+        image_form=AnotherImageForm()
+        image_form.fields.get('additional_img').initial=i.picture
+        additional_img.append(image_form)
+    context = {
+        'form':form,
+        'additional_img':additional_img,
+    }
+    return render(request,'edit_car.html',context)

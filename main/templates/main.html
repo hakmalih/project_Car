@@ -13,9 +13,16 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
-        <div class="container">
-            <div class="header__wrapper">
+<div class="header">
+    <div class="container">
+        <div class="header__wrapper">
+            <div class="header__wrapper-header">
+                <div class="header__wrapper-header-login-block">
+                    <a href="{% url 'registration' %}">Регистрация</a>
+                    <a href="#">Вход</a>
+                </div>
+            </div>
+            <div class="header__wrapper-information">
                 <a class="header__logo" href="{% url 'main' %}">
                     <img src="{% static 'img/logo.png' %}" alt="">
                 </a>
@@ -51,53 +58,54 @@
             </div>
         </div>
     </div>
-    <div class="header__second">
-        <div class="container">
-            <div class="header__second__wrapper">
-                <a href="{% url 'add_car' %}" class="add__car-link navigation-item">
-                    Добавить автомобиль
-                </a>
-                <a href="{% url 'catalog_page' %}" class="catalog-link navigation-item">
-                    Каталог
-                </a>
-                <a href="{% url 'shop_list' %}" class="shops-link navigation-item">
-                    Магазины
-                </a>
-                {% block navigator %}
-                {% endblock navigator %}
-            </div>
+</div>
+<div class="header__second">
+    <div class="container">
+        <div class="header__second__wrapper">
+            <a href="{% url 'add_car' %}" class="add__car-link navigation-item">
+                Добавить автомобиль
+            </a>
+            <a href="{% url 'catalog_page' %}" class="catalog-link navigation-item">
+                Каталог
+            </a>
+            <a href="{% url 'shop_list' %}" class="shops-link navigation-item">
+                Магазины
+            </a>
+            {% block navigator %}
+            {% endblock navigator %}
         </div>
     </div>
-    <div class="main">
-        <div class="container">
-            <div class="main__wrapper main_detail">
-                {% block main %}
-                <ul class="main__car-list">
-                    {% for card in cards %}
-                    <li class="main__car-item">
-                        <a href="{% url 'car_detail' card.id %}" class="main__car-item-detail-link">
-                            <div class="main__car-item-img">
-                                <img src="{{ card.image.url }}" alt="">
-                            </div>
-                            <p class="main__car-item-information">
-                                {{card.brand}} {{card.model}}
-                            </p>
-                            {% for color in card.color.all %}
-                            <p class="main__car-item-color">{{color}}</p>
-                            {% endfor %}
-                            {% for shop in card.shop.all %}
-                            <p class="main__car-item-shop">{{shop}}</p>
-                            {% endfor %}
-                            <p class="main__car-item-price">
-                                {{card.price}}
-                            </p>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-                {% endblock main %}
-            </div>
+</div>
+<div class="main">
+    <div class="container">
+        <div class="main__wrapper main_detail">
+            {% block main %}
+            <ul class="main__car-list">
+                {% for card in cards %}
+                <li class="main__car-item">
+                    <a href="{% url 'car_detail' card.id %}" class="main__car-item-detail-link">
+                        <div class="main__car-item-img">
+                            <img src="{{ card.image.url }}" alt="">
+                        </div>
+                        <p class="main__car-item-information">
+                            {{card.brand}} {{card.model}}
+                        </p>
+                        {% for color in card.color.all %}
+                        <p class="main__car-item-color">{{color}}</p>
+                        {% endfor %}
+                        {% for shop in card.shop.all %}
+                        <p class="main__car-item-shop">{{shop}}</p>
+                        {% endfor %}
+                        <p class="main__car-item-price">
+                            {{card.price}}
+                        </p>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% endblock main %}
         </div>
     </div>
+</div>
 </body>
 </html>

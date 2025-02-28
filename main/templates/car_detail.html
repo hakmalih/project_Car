@@ -7,7 +7,7 @@
 
 
 {% block navigator %}
-<a href="{% url 'johan' cars.id %}">Редактировать запись</a>
+<a href="{% url 'johan' cars.id %}" class="navigation-item">Редактировать запись</a>
 <a href="{% url 'test' cars.id %}">Редактировать запись formset</a>
 {% endblock navigator %}
 

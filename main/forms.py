@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.forms import HiddenInput, CheckboxInput
 
 from .models import Brand, Color,Shop
@@ -38,8 +39,32 @@ class AnotherImageForm(forms.Form):
 class AddCarForm(EditCarForm):
     additional_img = MultipleFileField(required=False)
 
+
+class AddShopForm (forms.ModelForm):
+    class Meta:
+        model = Shop
+        fields = '__all__'
+
+
 AnotherImageFormset=forms.formset_factory(AnotherImageForm,can_delete=True)
 
 class CatalogPageForm(forms.Form):
     brand = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Brand.objects.all(),required=False)
     color = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Color.objects.all(),required=False)
+
+
+class RegistrationForm(forms.ModelForm):
+    username = forms.CharField(label="Логин")
+    password = forms.CharField(widget=forms.PasswordInput,label="Пароль")
+    password2 = forms.CharField(widget=forms.PasswordInput,label="Повторите пароль")
+
+    class Meta:
+        model = get_user_model()
+        fields = "username","password"
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        password = cleaned_data.get('password')
+        password2 = cleaned_data.get('password2')
+        if password!=password2:
+            raise forms.ValidationError('Пароли не совпадают')

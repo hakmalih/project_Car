@@ -3,8 +3,16 @@
 
 {% block main %}
 <div class="main__second_wrapper">
+   <form action="" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button>Отправить</button>
+    </form>
     {% for shop in shops %}
         <p class="main__car-item-shop">{{shop}}</p>
     {% endfor %}
+
 </div>
 {% endblock %}

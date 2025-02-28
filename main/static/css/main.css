@@ -10,9 +10,45 @@
     background:bisque;
     padding:10px ;
     display:flex;
+    flex-direction:column;
+}
+
+.header__wrapper-header{
+    display:flex;
+    justify-content:end;
+}
+
+
+.header__wrapper-header-login-block{
+    display:flex;
+    gap:20px;
+    & a{
+        padding: 5px;
+        background-color: bisque;
+        border-radius: 5px;
+        color: darkmagenta;
+        position: relative;
+        transition: 0.3s ease;
+        opacity: 1;
+        &:hover {
+            background-color: violet;
+            color: bisque;
+        }
+        &:active {
+            top: 2px;
+            transition: 0.1s ease;
+        }
+    }
+}
+
+
+
+.header__wrapper-information{
+    display:flex;
     justify-content: space-around;
     align-items:center;
 }
+
 
 .header__logo{
    display: flex;
@@ -98,7 +134,7 @@
 }
 
 .navigation-item {
-     padding: 5px;
+    padding: 5px;
     background-color: bisque;
     border-radius: 5px;
     color: darkmagenta;

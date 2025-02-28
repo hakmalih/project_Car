@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect, get_object_or_404
 
 from main.models import Car, Brand, CarImage,Shop
 
-from .forms import AddCarForm, AnotherImageForm, EditCarForm, AnotherImageFormset, CatalogPageForm
+from .forms import AddCarForm, AnotherImageForm, EditCarForm, AnotherImageFormset, CatalogPageForm,AddShopForm, RegistrationForm
 
 from django.forms import modelformset_factory
 
@@ -144,11 +144,27 @@ def catalog_page(request):
     return render(request,'catalog_page.html',context)
 
 def shop_list(request):
-    cars = Car.objects.all()
     shops = Shop.objects.all()
+    form = AddShopForm()
+    if request.method=='POST':
+        form=AddShopForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('shop_list')
     context ={
         'shops':shops,
-        'cars': cars,
+        'form':form,
     }
     return render(request,'shop_list.html',context)
 
+
+def get_registration_page(request):
+    form = RegistrationForm()
+    if request.method=="POST":
+        form  = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context={
+        'form':form,
+    }
+    return render(request,'registration.html',context)

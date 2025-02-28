@@ -1,5 +1,7 @@
 from django import forms
-from .models import Brand
+from django.forms import HiddenInput, CheckboxInput
+
+from .models import Brand, Color,Shop
 
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
@@ -18,17 +20,26 @@ class MultipleFileField(forms.ImageField):
             result = single_file_clean(data, initial)
         return result
 
-class AddCarForm(forms.Form):
+class EditCarForm(forms.Form):
     brand = forms.ModelChoiceField(queryset=Brand.objects.all())
     model = forms.CharField(max_length=50,initial='johan')
     price = forms.DecimalField(max_digits=8, decimal_places=2)
-    image = forms.ImageField()
-    additional_img = MultipleFileField()
-    color = forms.CharField(max_length=100)
+    image = forms.ImageField(required=False)
+    color = forms.ModelMultipleChoiceField(queryset=Color.objects.all())
     description = forms.CharField(widget=forms.Textarea())
     annotation = forms.CharField(max_length=1000)
-
+    shop = forms.ModelMultipleChoiceField(queryset=Shop.objects.all())
 
 
 class AnotherImageForm(forms.Form):
     additional_img = forms.ImageField()
+    id= forms.IntegerField(widget=HiddenInput(),required=False)
+
+class AddCarForm(EditCarForm):
+    additional_img = MultipleFileField(required=False)
+
+AnotherImageFormset=forms.formset_factory(AnotherImageForm,can_delete=True)
+
+class CatalogPageForm(forms.Form):
+    brand = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Brand.objects.all(),required=False)
+    color = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple,queryset=Color.objects.all(),required=False)

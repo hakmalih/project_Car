@@ -54,8 +54,14 @@
     <div class="header__second">
         <div class="container">
             <div class="header__second__wrapper">
-                <a href="{% url 'add_car' %}" class="add__car-link">
+                <a href="{% url 'add_car' %}" class="add__car-link navigation-item">
                     Добавить автомобиль
+                </a>
+                <a href="{% url 'catalog_page' %}" class="catalog-link navigation-item">
+                    Каталог
+                </a>
+                <a href="{% url 'shop_list' %}" class="shops-link navigation-item">
+                    Магазины
                 </a>
                 {% block navigator %}
                 {% endblock navigator %}
@@ -67,18 +73,21 @@
             <div class="main__wrapper main_detail">
                 {% block main %}
                 <ul class="main__car-list">
-                    {% for card in cards%}
+                    {% for card in cards %}
                     <li class="main__car-item">
-                        <a href="{% url 'car_detail' card.id%}" class="main__car-item-detail-link">
+                        <a href="{% url 'car_detail' card.id %}" class="main__car-item-detail-link">
                             <div class="main__car-item-img">
                                 <img src="{{ card.image.url }}" alt="">
                             </div>
                             <p class="main__car-item-information">
                                 {{card.brand}} {{card.model}}
                             </p>
-                            <p class="main__car-item-color">
-                                {{card.color}}
-                            </p>
+                            {% for color in card.color.all %}
+                            <p class="main__car-item-color">{{color}}</p>
+                            {% endfor %}
+                            {% for shop in card.shop.all %}
+                            <p class="main__car-item-shop">{{shop}}</p>
+                            {% endfor %}
                             <p class="main__car-item-price">
                                 {{card.price}}
                             </p>

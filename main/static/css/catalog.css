@@ -1,0 +1,12 @@
+
+.main__second_wrapper{
+    display:flex;
+
+}
+.aside_navigation{
+    display:flex;
+    flex-direction:column;
+    width:1000px;
+    height:1000px;
+    background-color:orange;
+}

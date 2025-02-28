@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/catalog.css'%}">
+{% endblock css%}
+
+
+{% block main %}
+<div class="main__second_wrapper">
+    <div class="aside_navigation">
+        <form action="" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <table>
+            {{ catalog.as_table }}
+        </table>
+        <button>Отправить</button>
+        </form>
+    </div>
+    <ul class="main__car-list">
+        {% for card in cars %}
+        <li class="main__car-item">
+            <a href="{% url 'car_detail' card.id %}" class="main__car-item-detail-link">
+                <div class="main__car-item-img">
+                    <img src="{{ card.image.url }}" alt="">
+                </div>
+                <p class="main__car-item-information">
+                    {{card.brand}} {{card.model}}
+                </p>
+                {% for color in card.color.all %}
+                <p class="main__car-item-color">{{color}}</p>
+                {% endfor %}
+                {% for shop in card.shop.all %}
+                <p class="main__car-item-shop">{{shop}}</p>
+                {% endfor %}
+                <p class="main__car-item-price">
+                    {{card.price}}
+                </p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock main %}

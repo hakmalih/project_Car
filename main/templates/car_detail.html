@@ -8,6 +8,7 @@
 
 {% block navigator %}
 <a href="{% url 'johan' cars.id %}">Редактировать запись</a>
+<a href="{% url 'test' cars.id %}">Редактировать запись formset</a>
 {% endblock navigator %}
 
 {% block main %}
@@ -32,9 +33,20 @@
             <div class="main__car-item-detailpage-annotation">
                  {{cars.annotation}}
              </div>
+
             <div class="main__car-item-detailpage-color">
-                Цвет:{{cars.color}}
+                Цвет:
+                {% for color in cars.color.all %}
+                           {{color}};
+                {% endfor %}
             </div>
+             <div class="main__car-item-detailpage-shop">
+                Магазины:
+                {% for shop in cars.shop.all %}
+                           {{shop}};
+                {% endfor %}
+            </div>
+
             <div class="main__car-item-detailpage-price">
                 Цена:{{cars.price}}
             </div>

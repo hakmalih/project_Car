@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block main %}
+<div class="main__second_wrapper">
+    {% for shop in shops %}
+        <p class="main__car-item-shop">{{shop}}</p>
+    {% endfor %}
+</div>
+{% endblock %}

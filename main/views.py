@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect, get_object_or_404
 
 from main.models import Car, Brand, CarImage,Shop
+from django.contrib.auth import get_user_model
 
 from .forms import AddCarForm, AnotherImageForm, EditCarForm, AnotherImageFormset, CatalogPageForm,AddShopForm, RegistrationForm
 
@@ -168,3 +169,26 @@ def get_registration_page(request):
         'form':form,
     }
     return render(request,'registration.html',context)
+
+def enter_account(request):
+    form = RegistrationForm()
+    User = get_user_model()
+    if request.method=='POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            user = User.objects.filter(username=form.cleaned_data.get('username')).first()
+            print(user)
+            if not user:
+                return render(request, 'account_error.html', {'error_message':'Такого пользователя нет'})
+            else:
+                return redirect ('account_page')
+    context = {
+        'form': form,
+    }
+    return render(request, 'enter_account.html', context)
+
+def account_page(request):
+    context={
+
+    }
+    return render(request,'account_page.html',context)

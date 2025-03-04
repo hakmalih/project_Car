@@ -1,0 +1,8 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block main %}
+<h1>Ошибка</h1>
+<p>{{ error_message }}</p>
+<a href="{% url 'enter_account' %}">Войти в аккаунт</a>
+{% endblock main %}

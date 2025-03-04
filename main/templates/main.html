@@ -17,10 +17,12 @@
     <div class="container">
         <div class="header__wrapper">
             <div class="header__wrapper-header">
+                {% block buttons %}
                 <div class="header__wrapper-header-login-block">
                     <a href="{% url 'registration' %}">Регистрация</a>
-                    <a href="#">Вход</a>
+                    <a href="{% url 'enter_account' %}">Вход</a>
                 </div>
+                {% endblock buttons %}
             </div>
             <div class="header__wrapper-information">
                 <a class="header__logo" href="{% url 'main' %}">

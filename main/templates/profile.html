@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block main %}
+<form action="" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button name="edit_profile_data">Сохранить</button>
+</form>
+<form action="" method="POST" enctype="multipart/form-data" >
+    {% csrf_token %}
+    <table>
+        {{ password_form.as_table }}
+    </table>
+    <button name="edit_password">Сохранить</button>
+</form>
+{% endblock main %}

@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.management.commands.changepassword import UserModel
 from django.forms import HiddenInput, CheckboxInput
 
 from .models import Brand, Color,Shop
@@ -68,5 +69,34 @@ class RegistrationForm(forms.ModelForm):
         password2 = cleaned_data.get('password2')
         if password!=password2:
             raise forms.ValidationError('Пароли не совпадают')
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Логин")
+    password = forms.CharField(widget=forms.PasswordInput,label="Пароль")
+
+
+class ChangeUserCredentialForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = "username",'first_name','last_name','email'
+
+
+class ChangePasswordForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput,label="Введите старый пароль")
+    new_password = forms.CharField(widget=forms.PasswordInput,label="Новый пароль")
+    new_password2 = forms.CharField(widget=forms.PasswordInput,label="Повторите новый пароль")
+
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        new_password = cleaned_data.get('new_password')
+        new_password2 = cleaned_data.get('new_password2')
+        if new_password!=new_password2:
+            raise forms.ValidationError('Пароли не совпадают')
+
+
+
+
 
 

@@ -19,8 +19,13 @@
             <div class="header__wrapper-header">
                 {% block buttons %}
                 <div class="header__wrapper-header-login-block">
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'profile' %}">{{user.username}}</a>
+                    <a href="{% url 'logout' %}">Выход</a>
+                    {% else %}
                     <a href="{% url 'registration' %}">Регистрация</a>
-                    <a href="{% url 'enter_account' %}">Вход</a>
+                    <a href="{% url 'login' %}">Вход</a>
+                    {% endif %}
                 </div>
                 {% endblock buttons %}
             </div>
@@ -64,6 +69,7 @@
 <div class="header__second">
     <div class="container">
         <div class="header__second__wrapper">
+            <div class="navigation__button-list">
             <a href="{% url 'add_car' %}" class="add__car-link navigation-item">
                 Добавить автомобиль
             </a>
@@ -75,6 +81,15 @@
             </a>
             {% block navigator %}
             {% endblock navigator %}
+            </div>
+            <a href="{% url 'cart_detail' %}" class="basket">
+                <div class="basket_img">
+                    <img src="{% static 'img/basket.jpg' %}" alt="">
+                </div>
+                <p>
+                    {{cart|length}}
+                </p>
+            </a>
         </div>
     </div>
 </div>

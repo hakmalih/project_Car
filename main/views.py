@@ -1,9 +1,11 @@
 from django.shortcuts import render,redirect, get_object_or_404
 
 from main.models import Car, Brand, CarImage,Shop
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.models import User
 
-from .forms import AddCarForm, AnotherImageForm, EditCarForm, AnotherImageFormset, CatalogPageForm,AddShopForm, RegistrationForm
+from .forms import AddCarForm, AnotherImageForm, EditCarForm, AnotherImageFormset, CatalogPageForm, AddShopForm, \
+    RegistrationForm, LoginForm, ChangeUserCredentialForm, ChangePasswordForm
 
 from django.forms import modelformset_factory
 
@@ -164,11 +166,18 @@ def get_registration_page(request):
     if request.method=="POST":
         form  = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user=form.save(commit=False)
+            # user=User(username=form.cleaned_data.get('username'))
+            user.set_password(form.cleaned_data.get('password'))
+            user.save()
+            return redirect('main')
     context={
         'form':form,
     }
     return render(request,'registration.html',context)
+
+
+
 
 def enter_account(request):
     form = RegistrationForm()
@@ -179,13 +188,84 @@ def enter_account(request):
             user = User.objects.filter(username=form.cleaned_data.get('username')).first()
             print(user)
             if not user:
-                return render(request, 'account_error.html', {'error_message':'Такого пользователя нет'})
+                context={
+                    'error_message':'Такого пользователя нет',
+                }
+                return render(request, 'account_error.html', context)
             else:
-                return redirect ('account_page')
+                return render(request, 'main.html', {'user':user,})
     context = {
         'form': form,
     }
     return render(request, 'enter_account.html', context)
+
+
+def get_login_page(request):
+    form = LoginForm()
+    context={
+        'form':form,
+    }
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(request,username=form.cleaned_data.get('username'),
+                                password=form.cleaned_data.get('password'))
+            if user:
+                login(request,user)
+                return redirect('main')
+            else:
+                error_message = 'Пользователь с такими данными не найден'
+                form.add_error(None,error_message)
+                context = {
+                    'form': form,
+                }
+    return render(request,'login.html',context)
+
+
+
+def user_logout(request):
+    logout(request)
+    return redirect('main')
+
+def get_profile_page(request):
+    if request.user.is_authenticated:
+        user = request.user
+        form = ChangeUserCredentialForm(instance=user)
+        password_form = ChangePasswordForm()
+
+        if request.method == "POST":
+            if 'edit_profile_data' in request.POST:
+                form = ChangeUserCredentialForm(request.POST,instance=user)
+                if form.is_valid():
+                    form.save()
+                    return redirect('profile')
+            elif 'edit_password' in request.POST:
+                password_form = ChangePasswordForm(request.POST)
+                if password_form.is_valid():
+                    current_password = password_form.cleaned_data.get('password')
+                    if user.check_password(current_password):
+                        user.set_password(password_form.cleaned_data.get('new_password'))
+                        user.save()
+                        update_session_auth_hash(request,user)
+                        password_form.add_error(None,'Пароль успешно изменён')
+                    else:
+                        password_form.add_error(None,'Неверный текущий пароль')
+
+        context = {
+            'form': form,
+            'password_form':password_form,
+        }
+        return render(request, 'profile.html', context)
+    else:
+        return redirect('login')
+
+
+
+
+
+
+
+
 
 def account_page(request):
     context={
